@@ -1,0 +1,56 @@
+*QR reporte
+SET PATH TO C:\facturacion\
+SET PROCEDURE TO LOCFILE("FoxBarcodeQR.prg") ADITIVE
+&&SET PROCEDURE TO LOCFILE c:\facturacion\prg\FoxBarcodeQR.prg ADITIVE
+PRIVATE poFbc
+m.poFbc = CREATEOBJECT("FoxBarcodeQR")
+SELECT CARRITO
+REPORT FORM c:\facturacion\informe\factura.frx PREVIEW
+
+
+thisform.comando1.Enabled = .T.
+**thisform.comando2.Enabled = .F.
+
+**thisform.Hide
+**DO FORM C:\Facturacion\formulario\menu_principal.scx
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+SELECT TEMP_USING
+usu = USING
+nit_emp = STRTRAN(NIT,' ','')
+
+idv = thisform.texto8.Value
+SELECT VENTAS
+LOCATE FOR idv = IDVENTAS
+IF FOUND()
+REPLACE ESTADO_FAC WITH "A"
+REPLACE ANULADOR WITH usu
+replace	FECHA_ANUL WITH DATE()
+
+SELECT LIN_VENTAS
+SCAN
+*?ID_VENTAS
+IF ID_VENTAS = idv then
+replace estado_fac WITH "A"
+cod = CODIGO
+		
+SELECT NOTA_REMISION
+LOCATE FOR cod = ID_NR
+IF FOUND()
+REPLACE FACTURADO WITH ""
+*replace fcha_fac WITH DATE(  ,  ,  )
+REPLACE NRO_FAC WITH 0
+REPLACE NRO_AUTORI WITH ""
+ENDIF
+
+ENDIF
+SELECT LIN_VENTAS
+
+ENDSCAN
+
+messagebox("Se anulo correctamente",64+0,"Informacion")
+*thisform.Hide
+ELSE
+messagebox("error al anular",16+0,"Error")
+ENDIF

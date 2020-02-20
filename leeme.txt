@@ -1,0 +1,10 @@
+para configurar fecha en impresion de QR
+
+problema de seteo en FOXPRO
+
+configurar en:
+
+>herramientas
+>opciones
+>regional
+marcar configuracion de sistema..... en este debe estar en formato dd/mm/aaaa

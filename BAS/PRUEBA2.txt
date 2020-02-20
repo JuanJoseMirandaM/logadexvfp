@@ -1,0 +1,32 @@
+clear
+set century on
+set date to briti
+**close all
+sele 0
+var1 = "c:\monalisa\archivos\"
+
+
+
+archi1 = var1+(thisform.base.value)
+		select * from archi1 where PERIODO=alltrim(thisform.per.value) AND tipo_fact=1 OR PERIODO=alltrim(thisform.per.value)
+
+
+@ 6,10 say "Espere mientras se actualiza la tabla..."
+
+COPY TO \monalisa\archivos\Tempo_lcv
+close data
+
+use \monalisa\archivos\tempo_lcv exclusive
+sort to \monalisa\archivos\tempo on sucursal/A, modalidad/A, impresor/A, autoriza/A, fechanro/A, numero/A
+zap
+append from \monalisa\archivos\tempo
+close data
+
+use \monalisa\archivos\conso_ventas
+zap
+append from \monalisa\archivos\tempo_lcv
+@ 7,20 say "finalizando proceso...!!!!"
+close data
+release thisform
+
+RETURN
