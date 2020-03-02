@@ -1,9 +1,12 @@
+*CLEAR
 *res = CodC1("7904006306693",876814,"1665979","20080519",35958.60,"zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS")
 *7904006306693|876814|1665979|2008/05/19|35958,6|zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS|27773|7904006306693zZ787681455Z]xssKqk166597949Ef_6K9uH2008051967(EcV+%x+3595999u[Cc|15847127|ySxN|7B-F3-48-A8|
-*res = CodC1("412401000001376",30,"13967242013","20200227",200,"2z\$x@28F66G7D\-9{7H+q#F4jLk82+)mXR%\7W%S4H9I+fNh$2W_F7FZ72FC_6T")
-*?res
-FUNCTION CodC1(cNA, nF, cNIT, dF, nM, cLD)
-	LOCAL NA, NF, NIT, F, M, LD, VNF, VNIT, VF, VM, t, T, VT, p, CC, LPC, TRC4, ST, SP1, SP2, SP3, SP4, SP5, ST64, CDC
+res = CodC1("412401000001376",30,"13967242013","20200227",200,"2z\$x@28F66G7D\-9{7H+q#F4jLk82+)mXR%\7W%S4H9I+fNh$2W_F7FZ72FC_6T")
+?res
+PROCEDURE CodC1(cNA, nF, cNIT, dF, nM, cLD)
+?"codcontrol2"
+	*SET UDFPARMS TO REFERENCE
+	local NA, NF, NIT, F, M, LD, VNF, VNIT, VF, VM, t, T, VT, p, CC, LPC, TRC4, ST, SP1, SP2, SP3, SP4, SP5, ST64, CDC
 
 	
 *NA = "30040010595"
@@ -16,19 +19,19 @@ FUNCTION CodC1(cNA, nF, cNIT, dF, nM, cLD)
 	qNA = STRTRAN(cNA,' ','')
 	qNF = STRTRAN(STR(INT(nF)),' ','')
 	qNIT = STRTRAN(cNIT,' ','')
-	qF = STRTRAN(DTOS(dF), ' ', '')
-	*qF = dF 
+	*qF = STRTRAN(DTOS(dF), ' ', '')
+	qF = dF 
 	qM = STRTRAN(STR(INT(ROUND(nM,0))),' ','')
 	qLD = STRTRAN(cLD,' ','')
 	
 	*?LEN(NIT)
-	*?qNA
-	*?STR(nF)
-	*?qNF
-	*?qNIT
-	*?qF
-	*?qM
-	*?qLD
+	?qNA
+	?STR(nF)
+	?qNF
+	?qNIT
+	?qF
+	?qM
+	?qLD
 	VNF = GenerarVerhoeff(qNF , 2)
 	VNIT = GenerarVerhoeff(qNIT , 2)
 	*?VNIT
@@ -90,10 +93,10 @@ FUNCTION CodC1(cNA, nF, cNIT, dF, nM, cLD)
 	CDC = RC4(ST64 , LPC)
 	
 	RETURN CDC
-ENDFUNC
+
 	
-	FUNCTION Dec2Base(tnDec, tnBase)
-		LOCAL lcNro, lnResto, lcChr
+	Procedure Dec2Base(tnDec, tnBase)
+		local lcNro, lnResto, lcChr
 		IF EMPTY(tnBase)
 		 tnBase = 10
 		ENDIF 
@@ -107,7 +110,7 @@ ENDFUNC
 	RETURN(lcNro)
 
 	
-	FUNCTION  GenerarVerhoeff( x,  n){
+	Procedure  GenerarVerhoeff( x,  n){
 		s = ""
 		v = ""
 		FOR j=1 TO n
@@ -116,9 +119,8 @@ ENDFUNC
 			s = s + v
 		ENDFOR
 		RETURN s
-	ENDFUNC 
 	
-	FUNCTION QuitarGuion(s)
+	Procedure QuitarGuion(s)
 		n = ""
 		FOR i = 1 TO LEN(s)
 			IF SUBSTR(s,i,1) != '-' 
@@ -128,7 +130,7 @@ ENDFUNC
 		RETURN n
 	ENDFUNC
 	
-	FUNCTION SUMAASCII( S, a , n){
+	Procedure SUMAASCII( S, a , n)
 		t=0
 		i = a
 		DO WHILE i <= LEN(S)
@@ -137,11 +139,10 @@ ENDFUNC
 			*? t
 		ENDDO 
 		RETURN t
-	ENDFUNC
 	
-	FUNCTION base64(tnDec)
+	Procedure base64(tnDec)
 	tnBase = 64	
-	LOCAL lcNro, lnResto, lcChr
+	local lcNro, lnResto, lcChr
 	DIMENSION D[64] 	
 	D[1]='0'
 	D[2]='1'
@@ -217,10 +218,9 @@ ENDFUNC
 	ENDDO
 	
 	RETURN lcNro
-	ENDFUNC
 
 
-	FUNCTION RC4(mensaje,k)
+	Procedure RC4(mensaje,k)
 	
 	DIMENSION D[16] 
 	D[1]='0'
@@ -283,10 +283,9 @@ ENDFUNC
 		*?MensajeCifrado
 		MensajeCifrado = SUBSTR(MensajeCifrado,2,LEN(MensajeCifrado)-1)
 		RETURN MensajeCifrado
-	ENDFUNC
 
 
-	FUNCTION verhoeff(n)
+	Procedure verhoeff(n)
 
 	*n = "200707020"	
 	DIMENSION Mul[10,10]
@@ -518,4 +517,3 @@ ENDFUNC
 		res = STR(Inv[Check+1],1,0)
 
 	RETURN res
-	ENDFUNC 

@@ -64,7 +64,7 @@ IF VAL(cNumEnt)#0
 	ENDFOR
 	IF wBan = 0
    	*cCadFin = cCadFin + "de "
-   	cCadFin = cCadFin + " "
+   	cCadFin = cCadFin
 	ENDIF	
   ELSE
    cCadFin = "cero "

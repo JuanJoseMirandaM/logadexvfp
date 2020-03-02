@@ -22,13 +22,13 @@ FUNCTION CodC1(cNA, nF, cNIT, dF, nM, cLD)
 	qLD = STRTRAN(cLD,' ','')
 	
 	*?LEN(NIT)
-	*?qNA
-	*?STR(nF)
-	*?qNF
-	*?qNIT
-	*?qF
-	*?qM
-	*?qLD
+	?qNA
+	?STR(nF)
+	?qNF
+	?qNIT
+	?qF
+	?qM
+	?qLD
 	VNF = GenerarVerhoeff(qNF , 2)
 	VNIT = GenerarVerhoeff(qNIT , 2)
 	*?VNIT
